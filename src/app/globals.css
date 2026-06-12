@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: white;
+  color: #0f172a;
+  overflow-x: hidden;
+}
+
+.section {
+  @apply py-24 px-6 lg:px-16;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.85),
+    rgba(15, 23, 42, 0.4)
+  );
+}
+
+.btn-primary {
+  @apply bg-secondary text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply border border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-primary transition-all duration-300;
+}
+
+.card-shadow {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
