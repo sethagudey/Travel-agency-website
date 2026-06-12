@@ -1,0 +1,894 @@
+
+cat > /mnt/user-data/outputs/tourwallex.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tourwallex — Adventure Awaits</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #07090F;
+    --navy-mid: #0E1628;
+    --navy-soft: #151E35;
+    --coral: #FF5533;
+    --amber: #F5A623;
+    --mist: #EFF3FF;
+    --sage: #8DB8AD;
+    --white: #FFFFFF;
+    --text-dim: rgba(255,255,255,0.55);
+    --text-mid: rgba(255,255,255,0.8);
+    --radius: 16px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(7,9,15,0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--coral); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.875rem; font-weight: 500;
+    color: var(--text-mid); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--coral); color: var(--white);
+    border: none; border-radius: 50px; padding: 0.6rem 1.4rem;
+    font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(255,85,51,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(141,184,173,0.12) 0%, transparent 50%),
+      var(--navy);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 2.5rem; max-width: 800px; margin-left: auto; margin-right: 0;
+    padding-right: 5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 28px; height: 2px; background: var(--amber);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900; line-height: 1.0;
+    letter-spacing: -2px; margin-bottom: 1.5rem;
+  }
+  .hero-title em { font-style: italic; color: var(--coral); }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-mid);
+    line-height: 1.7; max-width: 500px; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--coral); color: var(--white);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,85,51,0.35); }
+  .btn-ghost {
+    color: var(--white); border: 1.5px solid rgba(255,255,255,0.25);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    font-weight: 500; font-size: 0.95rem; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
+  .hero-stats {
+    position: relative; z-index: 2;
+    display: flex; gap: 3rem; padding: 2.5rem 2.5rem;
+    margin-top: auto;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; letter-spacing: -1px;
+    color: var(--white);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; }
+
+  /* Floating cards */
+  .hero-card {
+    position: absolute; right: 3rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius); padding: 1.1rem 1.4rem;
+    z-index: 2;
+  }
+  .hero-card-top { top: 22%; }
+  .hero-card-bot { bottom: 22%; right: 5rem; }
+  .card-label { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 1px; }
+  .card-val { font-size: 1rem; font-weight: 600; }
+  .card-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; margin-right: 6px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* ── MARQUEE ── */
+  .marquee-section { padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden; }
+  .marquee-track { display: flex; gap: 0; white-space: nowrap; animation: marquee 30s linear infinite; }
+  .marquee-track:hover { animation-play-state: paused; }
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 700; font-style: italic;
+    color: var(--text-dim); padding: 0 2.5rem;
+    transition: color 0.3s;
+  }
+  .marquee-item:hover { color: var(--white); }
+  .marquee-sep { color: var(--coral); font-size: 2rem; padding: 0 0.5rem; line-height: 1.5; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 2.5rem; }
+  .section-eyebrow {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--coral); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-eyebrow::before { content:''; display:block; width:20px; height:2px; background:var(--coral); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900;
+    line-height: 1.1; letter-spacing: -1px; margin-bottom: 1.2rem;
+  }
+  .section-sub { color: var(--text-mid); line-height: 1.7; max-width: 520px; }
+
+  /* ── DESTINATIONS ── */
+  .destinations { background: var(--navy-mid); }
+  .dest-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap; }
+  .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 1.25rem; }
+  .dest-card {
+    border-radius: var(--radius); overflow: hidden; position: relative;
+    cursor: pointer; group: true;
+  }
+  .dest-card:first-child { grid-row: span 2; }
+  .dest-img {
+    width: 100%; height: 100%; min-height: 220px; object-fit: cover;
+    display: block; transition: transform 0.6s ease;
+    background: var(--navy-soft);
+  }
+  .dest-card:first-child .dest-img { min-height: 480px; }
+  .dest-card:hover .dest-img { transform: scale(1.06); }
+  .dest-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(7,9,15,0.85) 0%, rgba(7,9,15,0.1) 50%, transparent 100%);
+    padding: 1.5rem;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .dest-country { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 0.3rem; }
+  .dest-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
+  .dest-card:first-child .dest-name { font-size: 2rem; }
+  .dest-tag {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--coral); color: var(--white);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border-radius: 50px;
+  }
+
+  /* ── EXPERIENCES ── */
+  .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+  .exp-card {
+    background: var(--navy-soft); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius); padding: 2rem 1.75rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .exp-card:hover { border-color: rgba(255,85,51,0.4); transform: translateY(-4px); }
+  .exp-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-sm);
+    background: rgba(255,85,51,0.12); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem; font-size: 1.4rem;
+  }
+  .exp-title { font-family:'Playfair Display',serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .exp-desc { font-size: 0.875rem; color: var(--text-dim); line-height: 1.7; }
+
+  /* ── TOURS ── */
+  .tours { background: var(--navy-mid); }
+  .tours-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap; }
+  .tours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .tour-card {
+    background: var(--navy-soft); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius); overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .tour-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+  .tour-img { width: 100%; height: 200px; object-fit: cover; background: var(--navy); display: block; }
+  .tour-body { padding: 1.5rem; }
+  .tour-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+  .tour-region { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); }
+  .tour-days { font-size: 0.75rem; color: var(--text-dim); background: rgba(255,255,255,0.06); padding: 0.25rem 0.6rem; border-radius: 50px; }
+  .tour-name { font-family:'Playfair Display',serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .tour-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem; }
+  .tour-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1rem; }
+  .tour-price-label { font-size: 0.7rem; color: var(--text-dim); }
+  .tour-price { font-family:'Playfair Display',serif; font-size: 1.5rem; font-weight: 900; color: var(--white); }
+  .tour-price span { font-size: 0.75rem; font-family:'Inter',sans-serif; color: var(--text-dim); font-weight: 400; }
+  .tour-btn {
+    background: transparent; border: 1.5px solid rgba(255,85,51,0.5); color: var(--coral);
+    border-radius: 50px; padding: 0.5rem 1.1rem; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+  }
+  .tour-btn:hover { background: var(--coral); color: var(--white); border-color: var(--coral); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { overflow: hidden; }
+  .test-header { margin-bottom: 3rem; }
+  .test-track { display: flex; gap: 1.5rem; }
+  .test-card {
+    flex: 0 0 340px;
+    background: var(--navy-soft); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius); padding: 2rem;
+  }
+  .test-stars { color: var(--amber); letter-spacing: 2px; margin-bottom: 1rem; font-size: 0.9rem; }
+  .test-quote { font-size: 0.9rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.5rem; font-style: italic; }
+  .test-author { display: flex; align-items: center; gap: 0.75rem; }
+  .test-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--coral); display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+  }
+  .test-name { font-weight: 600; font-size: 0.875rem; }
+  .test-loc { font-size: 0.75rem; color: var(--text-dim); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--coral) 0%, #C03010 100%);
+    border-radius: 2rem; margin: 0 2.5rem 6rem; padding: 5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap;
+  }
+  .cta-text .section-eyebrow { color: rgba(255,255,255,0.6); }
+  .cta-text .section-eyebrow::before { background: rgba(255,255,255,0.6); }
+  .cta-text .section-title { color: var(--white); }
+  .cta-text .section-sub { color: rgba(255,255,255,0.75); }
+  .cta-actions { display: flex; flex-direction: column; gap: 1rem; min-width: 200px; }
+  .btn-white {
+    background: var(--white); color: var(--coral);
+    padding: 1rem 2rem; border-radius: 50px; font-weight: 700;
+    font-size: 0.95rem; text-decoration: none; text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s; display: block;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+  .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.6); text-align: center; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); padding: 4rem 2.5rem 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand .nav-logo { display: block; margin-bottom: 1rem; font-size: 1.6rem; }
+  .footer-brand p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; max-width: 260px; }
+  .footer-heading { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 1.25rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-links a { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { font-size: 0.78rem; color: var(--text-dim); }
+  .socials { display: flex; gap: 1rem; }
+  .social-link {
+    width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); text-decoration: none; font-size: 0.75rem; font-weight: 700;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-link:hover { border-color: var(--coral); color: var(--coral); }
+
+  /* SVG placeholder images */
+  .img-dest {
+    width: 100%; display: block;
+    background: var(--navy-soft);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-content { padding: 6rem 1.25rem 2rem; margin: 0; max-width: 100%; }
+    .hero-card { display: none; }
+    .hero-stats { padding: 2rem 1.25rem; gap: 1.5rem; flex-wrap: wrap; }
+    section { padding: 4rem 1.25rem; }
+    .dest-grid { grid-template-columns: 1fr 1fr; }
+    .dest-card:first-child { grid-column: span 2; grid-row: span 1; }
+    .dest-card:first-child .dest-img { min-height: 260px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .cta-section { margin: 0 1.25rem 4rem; padding: 3rem 2rem; }
+    .dest-header { margin-bottom: 2rem; }
+    .tours-header { margin-bottom: 2rem; }
+    .test-track { overflow-x: auto; padding-bottom: 0.5rem; }
+    .test-track::-webkit-scrollbar { height: 3px; }
+    .test-track::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+  }
+  @media (max-width: 560px) {
+    .dest-grid { grid-template-columns: 1fr; }
+    .dest-card:first-child { grid-column: auto; }
+    .hero-stats { gap: 1rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .cta-actions { min-width: unset; width: 100%; }
+    .hero-title { letter-spacing: -1px; }
+  }
+
+  /* mobile nav drawer */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 99;
+    background: var(--navy); display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 2rem;
+    transform: translateX(100%); transition: transform 0.3s ease;
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a { font-family:'Playfair Display',serif; font-size: 2rem; font-weight: 700; color: var(--white); text-decoration: none; }
+  .mobile-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; color: var(--white); font-size: 2rem; cursor: pointer;
+  }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Tour<span>wallex</span></a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#tours">Tours</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Book a Trip</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#destinations" class="mobile-link">Destinations</a>
+  <a href="#experiences" class="mobile-link">Experiences</a>
+  <a href="#tours" class="mobile-link">Tours</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#cta" class="btn-primary mobile-link">Book a Trip →</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">The World is Yours</div>
+    <h1 class="hero-title">
+      Go where<br>
+      <em>stories</em> begin
+    </h1>
+    <p class="hero-sub">Tourwallex crafts extraordinary journeys across the globe — from ancient ruins to pristine jungles. Every trip is a chapter you'll never forget.</p>
+    <div class="hero-actions">
+      <a href="#tours" class="btn-primary">Explore Tours →</a>
+      <a href="#destinations" class="btn-ghost">▶ View Destinations</a>
+    </div>
+  </div>
+
+  <!-- Floating cards -->
+  <div class="hero-card hero-card-top">
+    <div class="card-label">Next Departure</div>
+    <div class="card-val">🇵🇪 Machu Picchu</div>
+    <div style="font-size:0.78rem;color:var(--text-dim);margin-top:4px;">July 14 · 12 seats left</div>
+  </div>
+  <div class="hero-card hero-card-bot">
+    <div class="card-label">Live Travelers</div>
+    <div class="card-val"><span class="card-dot"></span>2,480 exploring now</div>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">180+</div>
+      <div class="stat-label">Destinations</div>
+    </div>
+    <div>
+      <div class="stat-num">48K</div>
+      <div class="stat-label">Happy travelers</div>
+    </div>
+    <div>
+      <div class="stat-num">12yr</div>
+      <div class="stat-label">Of adventure</div>
+    </div>
+    <div>
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Average rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Patagonia</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Santorini</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Kyoto</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Serengeti</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Maldives</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Petra</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Iceland</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Bali</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Machu Picchu</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Morocco</span><span class="marquee-sep">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Patagonia</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Santorini</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Kyoto</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Serengeti</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Maldives</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Petra</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Iceland</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Bali</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Machu Picchu</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Morocco</span><span class="marquee-sep">✦</span>
+  </div>
+</div>
+
+<!-- ── DESTINATIONS ── -->
+<section class="destinations" id="destinations">
+  <div class="dest-header reveal">
+    <div>
+      <div class="section-eyebrow">Explore the Globe</div>
+      <h2 class="section-title">Handpicked<br><em style="font-style:italic">destinations</em></h2>
+    </div>
+    <p class="section-sub">Every location carefully selected for its wonder, culture, and transformative power.</p>
+  </div>
+  <div class="dest-grid reveal">
+    <!-- Card 1: featured tall -->
+    <div class="dest-card">
+      <div class="dest-tag">Featured</div>
+      <svg class="dest-img" style="min-height:480px" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="480" fill="#1a2540"/>
+        <ellipse cx="200" cy="500" rx="300" ry="200" fill="#0e1628"/>
+        <polygon points="160,320 200,120 240,320" fill="#2a3a5c"/>
+        <polygon points="140,340 180,180 220,340" fill="#3a4e72"/>
+        <polygon points="100,360 155,200 210,360" fill="#2d4060"/>
+        <polygon points="190,340 240,160 290,340" fill="#253552"/>
+        <rect x="185" y="310" width="30" height="50" fill="#1e2d4a"/>
+        <circle cx="80" cy="80" r="35" fill="#F5A623" opacity="0.85"/>
+        <circle cx="80" cy="80" r="28" fill="#F5B84A" opacity="0.6"/>
+        <line x1="0" y1="160" x2="400" y2="180" stroke="rgba(245,166,35,0.15)" stroke-width="40"/>
+        <ellipse cx="200" cy="420" rx="180" ry="30" fill="#0a0f1e" opacity="0.5"/>
+        <text x="50" y="430" fill="rgba(255,255,255,0.15)" font-size="11" font-family="serif" font-style="italic">Patagonia, Chile</text>
+      </svg>
+      <div class="dest-overlay">
+        <div class="dest-country">South America</div>
+        <div class="dest-name">Patagonia</div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="dest-card">
+      <svg class="dest-img" style="min-height:220px" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="220" fill="#1a3050"/>
+        <rect x="0" y="130" width="400" height="90" fill="#0d2040"/>
+        <ellipse cx="200" cy="130" rx="220" ry="50" fill="#1a4070"/>
+        <!-- whitewashed buildings -->
+        <rect x="50" y="80" width="40" height="60" rx="4" fill="#e8e0d0"/>
+        <ellipse cx="70" cy="80" rx="20" ry="10" fill="#4080c0"/>
+        <rect x="110" y="90" width="35" height="50" rx="3" fill="#d8d0c0"/>
+        <ellipse cx="127" cy="90" rx="17" ry="9" fill="#3070b0"/>
+        <rect x="200" y="70" width="50" height="70" rx="4" fill="#e0d8c8"/>
+        <ellipse cx="225" cy="70" rx="25" ry="12" fill="#5090d0"/>
+        <rect x="280" y="85" width="40" height="55" rx="3" fill="#d0c8b8"/>
+        <circle cx="55" cy="30" r="18" fill="#FF5533" opacity="0.7"/>
+        <text x="180" y="210" fill="rgba(255,255,255,0.15)" font-size="10" font-family="serif" font-style="italic">Santorini, Greece</text>
+      </svg>
+      <div class="dest-overlay">
+        <div class="dest-country">Europe</div>
+        <div class="dest-name">Santorini</div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="dest-card">
+      <svg class="dest-img" style="min-height:220px" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="220" fill="#0d1f12"/>
+        <rect x="0" y="160" width="400" height="60" fill="#0a150d"/>
+        <!-- jungle canopy -->
+        <ellipse cx="50" cy="140" rx="70" ry="90" fill="#1a4020"/>
+        <ellipse cx="150" cy="120" rx="90" ry="110" fill="#1f5025"/>
+        <ellipse cx="280" cy="130" rx="100" ry="100" fill="#163518"/>
+        <ellipse cx="380" cy="145" rx="80" ry="85" fill="#1c4522"/>
+        <ellipse cx="100" cy="100" rx="60" ry="70" fill="#255a2a"/>
+        <ellipse cx="220" cy="90" rx="70" ry="80" fill="#2a6530"/>
+        <!-- temple peek -->
+        <rect x="175" y="130" width="50" height="60" fill="#8B7355" opacity="0.8"/>
+        <polygon points="175,130 200,100 225,130" fill="#6B5535" opacity="0.8"/>
+        <circle cx="320" cy="40" r="25" fill="#F5A623" opacity="0.6"/>
+        <text x="160" y="210" fill="rgba(255,255,255,0.15)" font-size="10" font-family="serif" font-style="italic">Bali, Indonesia</text>
+      </svg>
+      <div class="dest-overlay">
+        <div class="dest-country">Southeast Asia</div>
+        <div class="dest-name">Bali</div>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="dest-card">
+      <svg class="dest-img" style="min-height:220px" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="220" fill="#1a1008"/>
+        <rect x="0" y="150" width="400" height="70" fill="#100a04"/>
+        <!-- savanna silhouette -->
+        <rect x="0" y="140" width="400" height="30" fill="#2a1a08"/>
+        <!-- acacia trees -->
+        <rect x="60" y="100" width="6" height="50" fill="#3a2010"/>
+        <ellipse cx="63" cy="95" rx="35" ry="15" fill="#2d4010"/>
+        <rect x="180" y="90" width="8" height="60" fill="#3a2010"/>
+        <ellipse cx="184" cy="83" rx="45" ry="18" fill="#354812"/>
+        <rect x="320" y="105" width="6" height="45" fill="#3a2010"/>
+        <ellipse cx="323" cy="99" rx="30" ry="13" fill="#2d4010"/>
+        <!-- giraffe silhouette -->
+        <rect x="270" y="100" width="8" height="50" fill="#1a0f05"/>
+        <rect x="278" y="80" width="4" height="30" fill="#1a0f05"/>
+        <ellipse cx="280" cy="78" rx="8" ry="6" fill="#1a0f05"/>
+        <!-- sunset -->
+        <circle cx="200" cy="70" r="45" fill="#FF5533" opacity="0.75"/>
+        <rect x="0" y="70" width="400" height="70" fill="rgba(255,85,51,0.08)"/>
+        <text x="150" y="210" fill="rgba(255,255,255,0.15)" font-size="10" font-family="serif" font-style="italic">Serengeti, Tanzania</text>
+      </svg>
+      <div class="dest-overlay">
+        <div class="dest-country">Africa</div>
+        <div class="dest-name">Serengeti</div>
+      </div>
+    </div>
+    <!-- Card 5 -->
+    <div class="dest-card">
+      <svg class="dest-img" style="min-height:220px" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="220" fill="#0a1a30"/>
+        <rect x="0" y="130" width="400" height="90" fill="#041225"/>
+        <!-- northern lights -->
+        <ellipse cx="150" cy="80" rx="200" ry="60" fill="rgba(141,184,173,0.25)"/>
+        <ellipse cx="250" cy="60" rx="180" ry="50" fill="rgba(100,200,150,0.2)"/>
+        <ellipse cx="100" cy="100" rx="150" ry="40" fill="rgba(80,160,200,0.15)"/>
+        <!-- mountain -->
+        <polygon points="0,180 150,60 300,180" fill="#0f2040"/>
+        <polygon points="100,180 220,80 340,180" fill="#152a50"/>
+        <polygon points="250,180 350,90 400,180" fill="#0d1e38"/>
+        <rect x="0" y="170" width="400" height="50" fill="#061020"/>
+        <circle cx="330" cy="35" r="12" fill="#ffffff" opacity="0.9"/>
+        <text x="150" y="210" fill="rgba(255,255,255,0.15)" font-size="10" font-family="serif" font-style="italic">Iceland</text>
+      </svg>
+      <div class="dest-overlay">
+        <div class="dest-country">Nordic</div>
+        <div class="dest-name">Iceland</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCES ── -->
+<section id="experiences">
+  <div class="reveal">
+    <div class="section-eyebrow">What We Offer</div>
+    <h2 class="section-title">More than a trip —<br>an <em style="font-style:italic;color:var(--coral)">experience</em></h2>
+    <p class="section-sub">We design every journey around transformative moments — the kind that stay with you long after you're home.</p>
+  </div>
+  <div class="exp-grid reveal">
+    <div class="exp-card">
+      <div class="exp-icon">🏔️</div>
+      <div class="exp-title">Wilderness Expeditions</div>
+      <p class="exp-desc">Venture deep into untamed landscapes with expert guides. Summits, glaciers, and hidden valleys await the bold.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🏛️</div>
+      <div class="exp-title">Cultural Immersion</div>
+      <p class="exp-desc">Live like a local. Dine in family kitchens, attend ancient ceremonies, and understand the soul of each destination.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🐘</div>
+      <div class="exp-title">Wildlife Safaris</div>
+      <p class="exp-desc">Witness the Big Five in their natural habitat. Ethical, conservation-first safaris that protect what they reveal.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🤿</div>
+      <div class="exp-title">Ocean Adventures</div>
+      <p class="exp-desc">From coral reef diving to whale watching, our ocean experiences connect you with the planet's greatest wilderness.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">✈️</div>
+      <div class="exp-title">Luxury Escapes</div>
+      <p class="exp-desc">Private villas, chartered yachts, and Michelin dining — for when the journey itself deserves to be extraordinary.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🎒</div>
+      <div class="exp-title">Solo Adventures</div>
+      <p class="exp-desc">Travel alone, never lonely. Our curated solo trips bring together kindred spirits from around the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOURS ── -->
+<section class="tours" id="tours">
+  <div class="tours-header reveal">
+    <div>
+      <div class="section-eyebrow">Ready to Book</div>
+      <h2 class="section-title">Featured <em style="font-style:italic">tours</em></h2>
+    </div>
+    <a href="#" class="btn-ghost" style="white-space:nowrap">All Tours →</a>
+  </div>
+  <div class="tours-grid reveal">
+    <!-- Tour 1 -->
+    <div class="tour-card">
+      <svg class="tour-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="200" fill="#1a1008"/>
+        <rect x="0" y="140" width="400" height="60" fill="#100a04"/>
+        <rect x="0" y="130" width="400" height="20" fill="#2a1a08"/>
+        <rect x="55" y="90" width="6" height="50" fill="#3a2010"/>
+        <ellipse cx="58" cy="85" rx="32" ry="13" fill="#2d4010"/>
+        <rect x="180" y="80" width="8" height="60" fill="#3a2010"/>
+        <ellipse cx="184" cy="73" rx="42" ry="16" fill="#354812"/>
+        <rect x="320" y="95" width="6" height="45" fill="#3a2010"/>
+        <ellipse cx="323" cy="89" rx="28" ry="12" fill="#2d4010"/>
+        <circle cx="200" cy="60" r="40" fill="#FF5533" opacity="0.7"/>
+        <rect x="0" y="60" width="400" height="70" fill="rgba(255,85,51,0.06)"/>
+      </svg>
+      <div class="tour-body">
+        <div class="tour-meta">
+          <span class="tour-region">East Africa</span>
+          <span class="tour-days">10 Days</span>
+        </div>
+        <div class="tour-name">Serengeti & Kilimanjaro</div>
+        <p class="tour-desc">Great migration safari, crater rim camping, and the climb of a lifetime to Africa's rooftop.</p>
+        <div class="tour-footer">
+          <div>
+            <div class="tour-price-label">From</div>
+            <div class="tour-price">$3,490 <span>/ person</span></div>
+          </div>
+          <button class="tour-btn">View Tour</button>
+        </div>
+      </div>
+    </div>
+    <!-- Tour 2 -->
+    <div class="tour-card">
+      <svg class="tour-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="200" fill="#0d2545"/>
+        <rect x="0" y="130" width="400" height="70" fill="#051528"/>
+        <ellipse cx="200" cy="130" rx="220" ry="45" fill="#1a4070"/>
+        <rect x="40" y="75" width="42" height="65" rx="4" fill="#ded6c8"/>
+        <ellipse cx="61" cy="75" rx="21" ry="11" fill="#4585c5"/>
+        <rect x="105" y="85" width="36" height="55" rx="3" fill="#cec8b8"/>
+        <ellipse cx="123" cy="85" rx="18" ry="9" fill="#3575b5"/>
+        <rect x="200" y="65" width="52" height="75" rx="4" fill="#e6dece"/>
+        <ellipse cx="226" cy="65" rx="26" ry="13" fill="#5595d5"/>
+        <rect x="280" y="80" width="42" height="58" rx="3" fill="#cec0b0"/>
+        <circle cx="55" cy="25" r="20" fill="#FF5533" opacity="0.65"/>
+      </svg>
+      <div class="tour-body">
+        <div class="tour-meta">
+          <span class="tour-region">Europe</span>
+          <span class="tour-days">8 Days</span>
+        </div>
+        <div class="tour-name">Greek Islands Odyssey</div>
+        <p class="tour-desc">Santorini's sunsets, Mykonos nights, and hidden coves only sailors know. Sail the Aegean in style.</p>
+        <div class="tour-footer">
+          <div>
+            <div class="tour-price-label">From</div>
+            <div class="tour-price">$2,890 <span>/ person</span></div>
+          </div>
+          <button class="tour-btn">View Tour</button>
+        </div>
+      </div>
+    </div>
+    <!-- Tour 3 -->
+    <div class="tour-card">
+      <svg class="tour-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="200" fill="#1a2540"/>
+        <rect x="0" y="140" width="400" height="60" fill="#0e1628"/>
+        <polygon points="150,150 200,50 250,150" fill="#2a3a5c"/>
+        <polygon points="120,155 175,65 230,155" fill="#3a4e72"/>
+        <polygon points="80,158 145,75 210,158" fill="#2d4060"/>
+        <polygon points="190,155 250,60 310,155" fill="#253552"/>
+        <rect x="185" y="130" width="30" height="45" fill="#1e2d4a"/>
+        <ellipse cx="185" cy="130" rx="4" ry="4" fill="#F5A623" opacity="0.8"/>
+        <ellipse cx="215" cy="130" rx="4" ry="4" fill="#F5A623" opacity="0.8"/>
+        <circle cx="80" cy="55" r="32" fill="#F5A623" opacity="0.8"/>
+        <circle cx="80" cy="55" r="24" fill="#F5B84A" opacity="0.55"/>
+      </svg>
+      <div class="tour-body">
+        <div class="tour-meta">
+          <span class="tour-region">South America</span>
+          <span class="tour-days">12 Days</span>
+        </div>
+        <div class="tour-name">Patagonia End of the World</div>
+        <p class="tour-desc">Torres del Paine, Perito Moreno glacier, and the wild Tierra del Fuego. The planet's most dramatic frontier.</p>
+        <div class="tour-footer">
+          <div>
+            <div class="tour-price-label">From</div>
+            <div class="tour-price">$4,190 <span>/ person</span></div>
+          </div>
+          <button class="tour-btn">View Tour</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="about">
+  <div class="test-header reveal">
+    <div class="section-eyebrow">Traveler Stories</div>
+    <h2 class="section-title">Words from the road</h2>
+  </div>
+  <div class="test-track reveal">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"Tourwallex turned a dream into the most vivid two weeks of my life. The Serengeti at sunrise — nothing compares. I'm already booking my next trip."</p>
+      <div class="test-author">
+        <div class="test-avatar" style="background:var(--coral)">AM</div>
+        <div>
+          <div class="test-name">Amara Mensah</div>
+          <div class="test-loc">Accra, Ghana · Safari traveler</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"Every detail was handled flawlessly. The local guides they chose were exceptional — you don't just see a place, you understand it."</p>
+      <div class="test-author">
+        <div class="test-avatar" style="background:var(--sage)">JL</div>
+        <div>
+          <div class="test-name">James Larson</div>
+          <div class="test-loc">Toronto, Canada · Patagonia trek</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"I travel solo and always worried about safety. Tourwallex gave me confidence and community. Made friends for life on the Greek Islands tour."</p>
+      <div class="test-author">
+        <div class="test-avatar" style="background:var(--amber)">SK</div>
+        <div>
+          <div class="test-name">Saya Kimura</div>
+          <div class="test-loc">Tokyo, Japan · Solo traveler</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-quote">"The Iceland Northern Lights package was magical beyond words. Tourwallex doesn't just plan trips — they architect memories."</p>
+      <div class="test-author">
+        <div class="test-avatar" style="background:#7C3AED">FD</div>
+        <div>
+          <div class="test-name">Fatima Diallo</div>
+          <div class="test-loc">Paris, France · Iceland escape</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-section reveal" id="cta">
+  <div class="cta-text">
+    <div class="section-eyebrow">Start Your Journey</div>
+    <h2 class="section-title" style="color:var(--white)">Your next story<br>starts here</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.75)">Talk to a travel expert and get a personalized itinerary crafted just for you. No commitment. No pressure.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="mailto:hello@tourwallex.com" class="btn-white">Plan My Trip →</a>
+    <div class="cta-note">Free consultation · 24hr response</div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Tour<span>wallex</span></a>
+      <p>We craft unforgettable journeys to the world's most extraordinary places. Adventure, culture, and wonder — delivered.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Explore</div>
+      <ul class="footer-links">
+        <li><a href="#">Destinations</a></li>
+        <li><a href="#">All Tours</a></li>
+        <li><a href="#">Experiences</a></li>
+        <li><a href="#">Custom Trips</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Guides</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Travel Insurance</a></li>
+        <li><a href="#">Booking Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Tourwallex Ltd. All rights reserved.</p>
+    <div class="socials">
+      <a href="#" class="social-link">Ig</a>
+      <a href="#" class="social-link">Tw</a>
+      <a href="#" class="social-link">Fb</a>
+      <a href="#" class="social-link">Yt</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileLinks.forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
+HTMLEOF
+echo "Done"
