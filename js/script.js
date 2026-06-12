@@ -109,40 +109,64 @@ behavior: "smooth"
 
 /* ================= GOOGLE SHEETS BOOKING ================= */
 const form = document.getElementById("bookingForm");
+const modal = document.getElementById("confirmationModal");
+const bookingIdText = document.getElementById("bookingId");
 
-// 🔴 REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT URL
 const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+function generateBookingID() {
+return "TWX-" + Math.floor(Math.random() * 1000000);
+}
+
+function closeModal() {
+modal.style.display = "none";
+}
 
 form.addEventListener("submit", async (e) => {
 e.preventDefault();
 
+const bookingID = generateBookingID();
+
 const formData = {
+bookingID,
+package: form.package.value,
 name: form.name.value,
 email: form.email.value,
 phone: form.phone.value,
-destination: form.destination.value,
 travelDate: form.travelDate.value,
 travelers: form.travelers.value,
 message: form.message.value
 };
 
 try {
-const response = await fetch(SCRIPT_URL, {
+await fetch(SCRIPT_URL, {
 method: "POST",
 body: JSON.stringify(formData)
 });
 
-const result = await response.json();
+/* SHOW MODAL */
+bookingIdText.innerText = "Your Booking ID: " + bookingID;
+modal.style.display = "flex";
 
-if (result.success) {
-alert("Booking submitted successfully!");
+/* WHATSAPP MESSAGE */
+const whatsappMessage =
+`Hello Tourwallex, I just booked a trip!
+
+Booking ID: ${bookingID}
+Package: ${form.package.value}
+Name: ${form.name.value}
+Date: ${form.travelDate.value}
+Travelers: ${form.travelers.value}`;
+
+window.open(
+`https://wa.me/233000000000?text=${encodeURIComponent(whatsappMessage)}`,
+"_blank"
+);
+
 form.reset();
-} else {
-alert("Something went wrong. Try again.");
-}
 
 } catch (error) {
-alert("Network error. Please try again.");
+alert("Booking failed. Please try again.");
 console.error(error);
 }
 });
