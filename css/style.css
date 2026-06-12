@@ -298,3 +298,42 @@ grid-template-columns: 1fr;
 }
 
 }
+.menu-toggle {
+display: none;
+font-size: 30px;
+color: white;
+cursor: pointer;
+}
+
+.nav {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+@media (max-width: 768px) {
+
+.menu-toggle {
+display: block;
+}
+
+.nav {
+position: absolute;
+top: 70px;
+right: 0;
+background: #0f172a;
+flex-direction: column;
+width: 220px;
+padding: 20px;
+display: none;
+}
+
+.nav.active {
+display: flex;
+}
+
+.nav-links {
+flex-direction: column;
+gap: 15px;
+}
+}
