@@ -18,42 +18,82 @@ showSlide(currentSlide);
 }, 5000);
 
 
-/* ================= TESTIMONIAL SLIDER ================= */
+/* ================= TESTIMONIAL SLIDER (FIXED) ================= */
 const testimonials = document.querySelectorAll(".testimonial");
-let currentTestimonial = 0;
+const track = document.querySelector(".testimonial-track");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+const dotsContainer = document.querySelector(".dots");
 
-function showTestimonial(index) {
-testimonials.forEach((t, i) => {
-t.classList.remove("active");
-if (i === index) t.classList.add("active");
+let index = 0;
+
+// CREATE DOTS
+if (dotsContainer) {
+testimonials.forEach((_, i) => {
+const dot = document.createElement("span");
+dot.classList.add("dot");
+if (i === 0) dot.classList.add("active");
+
+dot.addEventListener("click", () => {
+goToSlide(i);
+});
+
+dotsContainer.appendChild(dot);
 });
 }
 
-setInterval(() => {
-currentTestimonial++;
-if (currentTestimonial >= testimonials.length) currentTestimonial = 0;
-showTestimonial(currentTestimonial);
-}, 4000);
-  const testimonials = document.querySelectorAll(".testimonial");
-let currentTestimonial = 0;
+const dots = document.querySelectorAll(".dot");
 
-function showTestimonial(index) {
-testimonials.forEach(t => t.classList.remove("active"));
-testimonials[index].classList.add("active");
+function updateSlider() {
+if (!track) return;
+
+track.style.transform = `translateX(-${index * 100}%)`;
+
+dots.forEach(dot => dot.classList.remove("active"));
+if (dots[index]) dots[index].classList.add("active");
 }
 
-function nextTestimonial() {
-currentTestimonial++;
-if (currentTestimonial >= testimonials.length) {
-currentTestimonial = 0;
-}
-showTestimonial(currentTestimonial);
+function goToSlide(i) {
+index = i;
+updateSlider();
 }
 
-setInterval(nextTestimonial, 4000);
+function nextSlide() {
+index++;
+if (index >= testimonials.length) index = 0;
+updateSlider();
+}
+
+function prevSlide() {
+index--;
+if (index < 0) index = testimonials.length - 1;
+updateSlider();
+}
+
+if (nextBtn) nextBtn.addEventListener("click", nextSlide);
+if (prevBtn) prevBtn.addEventListener("click", prevSlide);
+
+// AUTO PLAY
+setInterval(nextSlide, 5000);
+
+// TOUCH SUPPORT
+let startX = 0;
+
+if (track) {
+track.addEventListener("touchstart", e => {
+startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", e => {
+let endX = e.changedTouches[0].clientX;
+
+if (startX > endX + 50) nextSlide();
+if (startX < endX - 50) prevSlide();
+});
+}
 
 
-/* ================= FAQ ACCORDION ================= */
+/* ================= FAQ ================= */
 const faqs = document.querySelectorAll(".faq-item");
 
 faqs.forEach(item => {
@@ -63,29 +103,27 @@ item.classList.toggle("active");
 });
 
 
-/* ================= COUNTER ANIMATION ================= */
+/* ================= COUNTERS ================= */
 const counters = document.querySelectorAll(".counter");
 
 function animateCounters() {
 counters.forEach(counter => {
-const updateCount = () => {
 const target = +counter.innerText;
-const count = +counter.getAttribute("data-count") || target;
+let current = 0;
 
-let current = +counter.innerText;
-
+const update = () => {
 const increment = target / 100;
 
 if (current < target) {
-counter.innerText = Math.ceil(current + increment);
-setTimeout(updateCount, 20);
+current += increment;
+counter.innerText = Math.ceil(current);
+setTimeout(update, 20);
 } else {
 counter.innerText = target;
 }
 };
 
-counter.innerText = "0";
-updateCount();
+update();
 });
 }
 
@@ -129,6 +167,7 @@ const form = document.getElementById("bookingForm");
 const modal = document.getElementById("confirmationModal");
 const bookingIdText = document.getElementById("bookingId");
 
+// 🔴 REPLACE THIS WITH YOUR REAL SCRIPT URL
 const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
 
 function generateBookingID() {
@@ -136,9 +175,10 @@ return "TWX-" + Math.floor(Math.random() * 1000000);
 }
 
 function closeModal() {
-modal.style.display = "none";
+if (modal) modal.style.display = "none";
 }
 
+if (form) {
 form.addEventListener("submit", async (e) => {
 e.preventDefault();
 
@@ -161,11 +201,14 @@ method: "POST",
 body: JSON.stringify(formData)
 });
 
-/* SHOW MODAL */
+if (bookingIdText) {
 bookingIdText.innerText = "Your Booking ID: " + bookingID;
-modal.style.display = "flex";
+}
 
-/* WHATSAPP MESSAGE */
+if (modal) {
+modal.style.display = "flex";
+}
+
 const whatsappMessage =
 `Hello Tourwallex, I just booked a trip!
 
@@ -186,70 +229,7 @@ form.reset();
 alert("Booking failed. Please try again.");
 console.error(error);
 }
-  const track = document.querySelector(".testimonial-track");
-const testimonials = document.querySelectorAll(".testimonial");
-const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
-const dotsContainer = document.querySelector(".dots");
-
-let index = 0;
-
-// CREATE DOTS
-testimonials.forEach((_, i) => {
-const dot = document.createElement("span");
-dot.classList.add("dot");
-if (i === 0) dot.classList.add("active");
-
-dot.addEventListener("click", () => {
-goToSlide(i);
 });
-
-dotsContainer.appendChild(dot);
-});
-
-const dots = document.querySelectorAll(".dot");
-
-function updateSlider() {
-track.style.transform = `translateX(-${index * 100}%)`;
-
-dots.forEach(dot => dot.classList.remove("active"));
-dots[index].classList.add("active");
 }
 
-function goToSlide(i) {
-index = i;
-updateSlider();
-}
-
-function nextSlide() {
-index++;
-if (index >= testimonials.length) index = 0;
-updateSlider();
-}
-
-function prevSlide() {
-index--;
-if (index < 0) index = testimonials.length - 1;
-updateSlider();
-}
-
-nextBtn.addEventListener("click", nextSlide);
-prevBtn.addEventListener("click", prevSlide);
-
-// AUTO PLAY
-setInterval(nextSlide, 5000);
-
-// TOUCH SUPPORT (mobile swipe)
-let startX = 0;
-
-track.addEventListener("touchstart", e => {
-startX = e.touches[0].clientX;
-});
-
-track.addEventListener("touchend", e => {
-let endX = e.changedTouches[0].clientX;
-
-if (startX > endX + 50) nextSlide();
-if (startX < endX - 50) prevSlide();
-});
 });
