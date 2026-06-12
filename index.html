@@ -1,178 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Tourwallex | Explore The World</title>
+
+<meta name="description" content="Tourwallex - Your premium travel partner for unforgettable adventures worldwide. Book tours, explore destinations, and travel the world with ease.">
+
+<meta name="keywords" content="travel, tours, vacation, adventure, flights, holidays, Tourwallex">
+
+<meta name="author" content="Tourwallex">
 
 <link rel="stylesheet" href="css/style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<header>
-    <nav class="navbar">
-        <div class="logo">
-            Tour<span>Wallex</span>
-        </div>
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="logo">Tour<span>Wallex</span></div>
 
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#destinations">Destinations</a></li>
-            <li><a href="#tours">Tours</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#tours">Tours</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-        <a href="#contact" class="btn">Book Now</a>
-    </nav>
+  <a href="#booking" class="btn">Book Now</a>
 </header>
 
-<section class="hero">
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
 
-    <div class="slide active">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="">
+  <div class="slide active">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" />
+  </div>
+
+  <div class="slide">
+    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4" />
+  </div>
+
+  <div class="slide">
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" />
+  </div>
+
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <h1>Explore The World With Tourwallex</h1>
+    <p>Adventure. Luxury. Memories that last forever.</p>
+
+    <div class="hero-buttons">
+      <a href="#tours" class="btn">Explore Tours</a>
+      <a href="#booking" class="btn-outline">Book Now</a>
     </div>
-
-    <div class="slide">
-        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4" alt="">
-    </div>
-
-    <div class="slide">
-        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" alt="">
-    </div>
-
-    <div class="overlay"></div>
-
-    <div class="hero-content">
-        <h1>Explore The World With Tourwallex</h1>
-        <p>
-            Discover breathtaking destinations, luxury escapes,
-            and unforgettable adventures.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#tours" class="btn">Explore Tours</a>
-            <a href="#contact" class="btn-outline">Contact Us</a>
-        </div>
-    </div>
+  </div>
 
 </section>
 
+<!-- ================= SEARCH ================= -->
+<section class="search-section">
+
+  <div class="search-box">
+
+    <input type="text" placeholder="Destination">
+
+    <input type="date">
+
+    <select>
+      <option>Budget</option>
+      <option>$500 - $1000</option>
+      <option>$1000 - $3000</option>
+      <option>$3000+</option>
+    </select>
+
+    <button class="btn">Search</button>
+
+  </div>
+
+</section>
+
+<!-- ================= STATS ================= -->
 <section class="stats">
-    <div class="stat">
-        <h2>15K+</h2>
-        <p>Happy Travelers</p>
-    </div>
 
-    <div class="stat">
-        <h2>75+</h2>
-        <p>Countries</p>
-    </div>
+  <div>
+    <h2 class="counter">15000</h2>
+    <p>Happy Travelers</p>
+  </div>
 
-    <div class="stat">
-        <h2>500+</h2>
-        <p>Tours</p>
-    </div>
+  <div>
+    <h2 class="counter">75</h2>
+    <p>Countries</p>
+  </div>
+
+  <div>
+    <h2 class="counter">500</h2>
+    <p>Tours</p>
+  </div>
+
 </section>
 
+<!-- ================= DESTINATIONS ================= -->
 <section id="destinations" class="destinations">
 
-    <h2>Popular Destinations</h2>
+<h2>Popular Destinations</h2>
 
-    <div class="destination-grid">
+<div class="grid">
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4">
-            <h3>Bali</h3>
-        </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4">
+    <h3>Bali</h3>
+  </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c">
-            <h3>Dubai</h3>
-        </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c">
+    <h3>Dubai</h3>
+  </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114">
-            <h3>Paris</h3>
-        </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114">
+    <h3>Paris</h3>
+  </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e">
-            <h3>Cape Town</h3>
-        </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e">
+    <h3>Cape Town</h3>
+  </div>
 
-    </div>
+</div>
 
 </section>
 
+<!-- ================= TOURS ================= -->
 <section id="tours" class="tours">
 
-    <h2>Featured Tours</h2>
+<h2>Featured Tours</h2>
 
-    <div class="tour-grid">
+<div class="grid">
 
-        <div class="tour-card">
-            <h3>Bali Adventure</h3>
-            <p>7 Days Experience</p>
-            <span>$1,200</span>
-        </div>
+  <div class="tour-card">
+    <h3>Bali Adventure</h3>
+    <p>7 Days</p>
+    <span>$1200</span>
+  </div>
 
-        <div class="tour-card">
-            <h3>Dubai Luxury Escape</h3>
-            <p>5 Days Experience</p>
-            <span>$1,800</span>
-        </div>
+  <div class="tour-card">
+    <h3>Dubai Luxury</h3>
+    <p>5 Days</p>
+    <span>$1800</span>
+  </div>
 
-        <div class="tour-card">
-            <h3>Paris Romance Tour</h3>
-            <p>6 Days Experience</p>
-            <span>$1,600</span>
-        </div>
+  <div class="tour-card">
+    <h3>Paris Romance</h3>
+    <p>6 Days</p>
+    <span>$1600</span>
+  </div>
 
-    </div>
+</div>
 
 </section>
 
+<!-- ================= ABOUT ================= -->
 <section id="about" class="about">
 
-    <h2>Why Tourwallex?</h2>
+<h2>Why Tourwallex?</h2>
 
-    <div class="about-grid">
-        <div>✓ Expert Travel Guides</div>
-        <div>✓ Secure Bookings</div>
-        <div>✓ Affordable Packages</div>
-        <div>✓ 24/7 Support</div>
-    </div>
+<div class="features">
+
+  <div>✔ Expert Guides</div>
+  <div>✔ Secure Booking</div>
+  <div>✔ Best Prices</div>
+  <div>✔ 24/7 Support</div>
+
+</div>
 
 </section>
 
+<!-- ================= GALLERY ================= -->
+<section id="gallery" class="gallery">
+
+<h2>Travel Gallery</h2>
+
+<div class="grid">
+
+  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+  <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4">
+  <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c">
+  <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114">
+
+</div>
+
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="testimonials">
+
+<h2>What Travelers Say</h2>
+
+<div class="testimonial active">
+  <p>"Tourwallex made our honeymoon unforgettable."</p>
+  <h4>Sarah Johnson</h4>
+</div>
+
+<div class="testimonial">
+  <p>"Best travel experience ever!"</p>
+  <h4>Michael Brown</h4>
+</div>
+
+<div class="testimonial">
+  <p>"Highly recommended for luxury travel."</p>
+  <h4>David Smith</h4>
+</div>
+
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+  <h3>How do I book a tour?</h3>
+  <p>Use the booking form below and we will confirm via email.</p>
+</div>
+
+<div class="faq-item">
+  <h3>Is payment secure?</h3>
+  <p>Yes, all payments are encrypted and secure.</p>
+</div>
+
+<div class="faq-item">
+  <h3>Can I cancel my booking?</h3>
+  <p>Yes, cancellations are allowed before departure.</p>
+</div>
+
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section id="booking" class="booking">
+
+<h2>Book Your Adventure</h2>
+
+<form id="bookingForm">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="tel" name="phone" placeholder="Phone" required>
+
+<input type="text" name="destination" placeholder="Destination" required>
+
+<input type="date" name="travelDate" required>
+
+<input type="number" name="travelers" placeholder="Travelers" required>
+
+<textarea name="message" placeholder="Message"></textarea>
+
+<button type="submit" class="btn">Submit Booking</button>
+
+<p id="successMessage"></p>
+
+</form>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
 <section id="contact" class="contact">
 
-    <h2>Contact Us</h2>
+<h2>Contact Us</h2>
 
-    <form>
-        <input type="text" placeholder="Your Name">
-
-        <input type="email" placeholder="Email Address">
-
-        <textarea placeholder="Message"></textarea>
-
-        <button type="submit" class="btn">
-            Send Message
-        </button>
-    </form>
+<p>Email: info@tourwallex.com</p>
+<p>Phone: +233 000 000 000</p>
 
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer>
-    <h3>Tourwallex</h3>
-    <p>Adventure Starts Here.</p>
+
+<p>© 2026 Tourwallex. All Rights Reserved.</p>
+
 </footer>
 
+<!-- ================= FLOATING BUTTONS ================= -->
+<a href="https://wa.me/233000000000" class="whatsapp">💬</a>
+
+<button id="topBtn">↑</button>
+
+<!-- ================= SCRIPT ================= -->
 <script src="js/script.js"></script>
 
 </body>
