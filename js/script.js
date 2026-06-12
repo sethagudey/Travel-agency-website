@@ -34,6 +34,23 @@ currentTestimonial++;
 if (currentTestimonial >= testimonials.length) currentTestimonial = 0;
 showTestimonial(currentTestimonial);
 }, 4000);
+  const testimonials = document.querySelectorAll(".testimonial");
+let currentTestimonial = 0;
+
+function showTestimonial(index) {
+testimonials.forEach(t => t.classList.remove("active"));
+testimonials[index].classList.add("active");
+}
+
+function nextTestimonial() {
+currentTestimonial++;
+if (currentTestimonial >= testimonials.length) {
+currentTestimonial = 0;
+}
+showTestimonial(currentTestimonial);
+}
+
+setInterval(nextTestimonial, 4000);
 
 
 /* ================= FAQ ACCORDION ================= */
