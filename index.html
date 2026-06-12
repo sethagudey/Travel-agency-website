@@ -252,25 +252,38 @@
 
 <form id="bookingForm">
 
+<select name="package" required>
+  <option value="">Select Package</option>
+  <option>Bali Adventure - $1200</option>
+  <option>Dubai Luxury - $1800</option>
+  <option>Paris Romance - $1600</option>
+</select>
+
 <input type="text" name="name" placeholder="Full Name" required>
 
 <input type="email" name="email" placeholder="Email" required>
 
 <input type="tel" name="phone" placeholder="Phone" required>
 
-<input type="text" name="destination" placeholder="Destination" required>
-
 <input type="date" name="travelDate" required>
 
-<input type="number" name="travelers" placeholder="Travelers" required>
+<input type="number" name="travelers" placeholder="Number of Travelers" required>
 
-<textarea name="message" placeholder="Message"></textarea>
+<textarea name="message" placeholder="Special Requests"></textarea>
 
-<button type="submit" class="btn">Submit Booking</button>
-
-<p id="successMessage"></p>
+<button type="submit" class="btn">Confirm Booking</button>
 
 </form>
+
+<!-- CONFIRMATION MODAL -->
+<div id="confirmationModal" class="modal">
+  <div class="modal-content">
+    <h2>Booking Confirmed 🎉</h2>
+    <p id="bookingId"></p>
+    <p>We will contact you shortly via email or WhatsApp.</p>
+    <button onclick="closeModal()" class="btn">Close</button>
+  </div>
+</div>
 
 </section>
 
