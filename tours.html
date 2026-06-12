@@ -1,56 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Tours | Tourwallex</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tourwallex | Explore Tours</title>
+
 <link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header class="navbar">
+<!-- ================= NAV ================= -->
+<header class="nav">
+
 <div class="logo">Tour<span>Wallex</span></div>
 
-<nav>
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="destinations.html">Destinations</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
+<div class="menu-toggle" id="menu-toggle">☰</div>
+
+<nav id="nav-menu">
+<a href="index.html">Home</a>
+<a href="tours.html">Tours</a>
+<a href="about.html">About</a>
+<a href="booking.html">Booking</a>
+<a href="contact.html">Contact</a>
 </nav>
 
-<a href="index.html#booking" class="btn">Book Now</a>
 </header>
 
+<!-- ================= HERO ================= -->
 <section class="page-hero">
-<h1>Our Tour Packages</h1>
-</section>
 
-<section class="grid">
+<h1>Discover World-Class Tours</h1>
+<p>Handpicked adventures, luxury escapes, and unforgettable experiences.</p>
 
-<div class="tour-card">
-<h3>Bali Adventure</h3>
-<p>7 Days - Island experience</p>
-<span>$1200</span>
+<!-- SEARCH -->
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search destinations...">
 </div>
 
-<div class="tour-card">
-<h3>Dubai Luxury</h3>
-<p>5 Days - Luxury escape</p>
-<span>$1800</span>
-</div>
-
-<div class="tour-card">
-<h3>Paris Romance</h3>
-<p>6 Days - Love in Paris</p>
-<span>$1600</span>
+<!-- FILTER BUTTONS -->
+<div class="filters">
+<button onclick="filterTours('all')">All</button>
+<button onclick="filterTours('luxury')">Luxury</button>
+<button onclick="filterTours('adventure')">Adventure</button>
+<button onclick="filterTours('budget')">Budget</button>
 </div>
 
 </section>
 
+<!-- ================= TOURS GRID ================= -->
+<section class="section">
+
+<div class="grid" id="toursGrid"></div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
 <footer>
-<p>© 2026 Tourwallex</p>
+
+<div class="footer-grid">
+
+<div>
+<h3>Tourwallex</h3>
+<p>Premium travel experiences worldwide.</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<a href="index.html">Home</a>
+<a href="tours.html">Tours</a>
+<a href="booking.html">Booking</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<div>
+<h4>Follow Us</h4>
+<p>Instagram | Facebook | TikTok</p>
+</div>
+
+</div>
+
+<p class="copy">© 2026 Tourwallex</p>
+
 </footer>
+
+<!-- ================= JS ================= -->
+<script src="js/app.js"></script>
+
+<script>
+
+/* ================= MOBILE MENU ================= */
+const toggle = document.getElementById("menu-toggle");
+const menu = document.getElementById("nav-menu");
+
+toggle.addEventListener("click", () => {
+menu.classList.toggle("active");
+});
+
+/* ================= TOUR DATA (REAL APP CORE) ================= */
+const tours = [
+{
+title: "Dubai Luxury Escape",
+price: "$1200",
+days: "5 Days",
+type: "luxury",
+img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+},
+{
+title: "Bali Adventure Trip",
+price: "$900",
+days: "7 Days",
+type: "adventure",
+img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4"
+},
+{
+title: "Paris Romantic Getaway",
+price: "$1500",
+days: "6 Days",
+type: "luxury",
+img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34"
+},
+{
+title: "Kenya Safari Experience",
+price: "$800",
+days: "5 Days",
+type: "adventure",
+img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+},
+{
+title: "Thailand Budget Escape",
+price: "$600",
+days: "6 Days",
+type: "budget",
+img: "https://images.unsplash.com/photo-1528181304800-259b08848526"
+}
+];
+
+const grid = document.getElementById("toursGrid");
+
+/* ================= RENDER TOURS ================= */
+function renderTours(data) {
+grid.innerHTML = "";
+
+data.forEach(tour => {
+const card = document.createElement("div");
+card.classList.add("card","glass");
+
+card.innerHTML = `
+<img src="${tour.img}" style="width:100%;border-radius:12px;">
+<h3>${tour.title}</h3>
+<p>${tour.days}</p>
+<strong>${tour.price}</strong>
+<br><br>
+<a href="booking.html" class="btn">Book Now</a>
+`;
+
+grid.appendChild(card);
+});
+}
+
+/* initial load */
+renderTours(tours);
+
+/* ================= FILTER SYSTEM ================= */
+function filterTours(type) {
+if (type === "all") return renderTours(tours);
+
+const filtered = tours.filter(t => t.type === type);
+renderTours(filtered);
+}
+
+/* ================= SEARCH SYSTEM ================= */
+document.getElementById("searchInput").addEventListener("input", (e) => {
+const value = e.target.value.toLowerCase();
+
+const filtered = tours.filter(t =>
+t.title.toLowerCase().includes(value)
+);
+
+renderTours(filtered);
+});
+
+</script>
 
 </body>
 </html>
