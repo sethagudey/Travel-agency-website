@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/* NAV */
+/* ================= MOBILE MENU ================= */
 const toggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav");
+const menu = document.getElementById("nav-menu");
 
 toggle.addEventListener("click", () => {
-nav.classList.toggle("active");
+menu.classList.toggle("active");
 });
 
-/* HERO SLIDER */
+/* ================= HERO SLIDER ================= */
 const slides = document.querySelectorAll(".slide");
 let i = 0;
 
@@ -18,15 +18,14 @@ i = (i + 1) % slides.length;
 slides[i].classList.add("active");
 }, 5000);
 
-/* BOOKING (Google Sheets ready later) */
-const form = document.getElementById("bookingForm");
+/* ================= TESTIMONIALS ================= */
+const testimonials = document.querySelectorAll(".testimonial");
+let t = 0;
 
-if (form) {
-form.addEventListener("submit", (e) => {
-e.preventDefault();
-alert("Booking submitted successfully!");
-form.reset();
-});
-}
+setInterval(() => {
+testimonials.forEach(x => x.classList.remove("active"));
+t = (t + 1) % testimonials.length;
+testimonials[t].classList.add("active");
+}, 4000);
 
 });
