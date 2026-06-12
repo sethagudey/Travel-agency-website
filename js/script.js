@@ -186,6 +186,70 @@ form.reset();
 alert("Booking failed. Please try again.");
 console.error(error);
 }
+  const track = document.querySelector(".testimonial-track");
+const testimonials = document.querySelectorAll(".testimonial");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+const dotsContainer = document.querySelector(".dots");
+
+let index = 0;
+
+// CREATE DOTS
+testimonials.forEach((_, i) => {
+const dot = document.createElement("span");
+dot.classList.add("dot");
+if (i === 0) dot.classList.add("active");
+
+dot.addEventListener("click", () => {
+goToSlide(i);
 });
 
+dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dot");
+
+function updateSlider() {
+track.style.transform = `translateX(-${index * 100}%)`;
+
+dots.forEach(dot => dot.classList.remove("active"));
+dots[index].classList.add("active");
+}
+
+function goToSlide(i) {
+index = i;
+updateSlider();
+}
+
+function nextSlide() {
+index++;
+if (index >= testimonials.length) index = 0;
+updateSlider();
+}
+
+function prevSlide() {
+index--;
+if (index < 0) index = testimonials.length - 1;
+updateSlider();
+}
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+// AUTO PLAY
+setInterval(nextSlide, 5000);
+
+// TOUCH SUPPORT (mobile swipe)
+let startX = 0;
+
+track.addEventListener("touchstart", e => {
+startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", e => {
+let endX = e.changedTouches[0].clientX;
+
+if (startX > endX + 50) nextSlide();
+if (startX < endX - 50) prevSlide();
+});
 });
