@@ -4,65 +4,178 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>About Us | Tourwallex</title>
+<title>Tourwallex | About Us</title>
 
 <link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header class="navbar">
-  <div class="logo">Tour<span>Wallex</span></div>
+<!-- ================= NAV ================= -->
+<header class="nav">
 
-  <nav>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="destinations.html">Destinations</a></li>
-      <li><a href="tours.html">Tours</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+<div class="logo">Tour<span>Wallex</span></div>
 
-  <a href="index.html#booking" class="btn">Book Now</a>
+<div class="menu-toggle" id="menu-toggle">☰</div>
+
+<nav id="nav-menu">
+<a href="index.html">Home</a>
+<a href="tours.html">Tours</a>
+<a href="about.html">About</a>
+<a href="booking.html">Booking</a>
+<a href="contact.html">Contact</a>
+</nav>
+
 </header>
 
+<!-- ================= HERO ================= -->
 <section class="page-hero">
-  <h1>About Tourwallex</h1>
-  <p>We create unforgettable travel experiences around the world.</p>
+
+<h1>About Tourwallex</h1>
+<p>We craft unforgettable travel experiences across the world.</p>
+
 </section>
 
-<section class="about-section">
+<!-- ================= STORY ================= -->
+<section class="section">
 
-<h2>Who We Are</h2>
+<div class="glass about-box">
+
+<h2>Our Story</h2>
 
 <p>
-Tourwallex is a premium travel agency dedicated to crafting
-unique adventure, luxury, and cultural travel experiences.
-We connect travelers to breathtaking destinations worldwide.
+Tourwallex was built with one vision — to make global travel simple, accessible, and unforgettable.
+From luxury escapes to adventure journeys, we connect travelers with experiences that matter.
 </p>
+
+<p>
+We believe travel is not just movement — it is transformation. Every trip we design is crafted with precision, care, and a deep understanding of what modern travelers need.
+</p>
+
+</div>
+
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="section dark">
+
+<h2>Why Travelers Trust Us</h2>
+
+<div class="grid">
+
+<div class="card glass">
+<h3>10,000+</h3>
+<p>Happy Travelers</p>
+</div>
+
+<div class="card glass">
+<h3>120+</h3>
+<p>Global Destinations</p>
+</div>
+
+<div class="card glass">
+<h3>4.9/5</h3>
+<p>Customer Rating</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= MISSION ================= -->
+<section class="section">
+
+<div class="glass about-box">
 
 <h2>Our Mission</h2>
 
 <p>
-To make travel simple, affordable, and unforgettable for everyone.
+To redefine travel experiences in Africa and beyond by combining technology, trust, and world-class service.
+We aim to become a leading digital travel platform that empowers people to explore the world effortlessly.
 </p>
 
-<h2>Why Choose Us</h2>
-
-<ul>
-<li>✔ Trusted travel experts</li>
-<li>✔ Affordable packages</li>
-<li>✔ 24/7 support</li>
-<li>✔ Safe & secure booking</li>
-</ul>
+</div>
 
 </section>
 
+<!-- ================= TEAM ================= -->
+<section class="section dark">
+
+<h2>Meet Our Vision</h2>
+
+<div class="grid">
+
+<div class="card glass">
+<h3>Adventure Experts</h3>
+<p>We design unforgettable journeys tailored for every traveler.</p>
+</div>
+
+<div class="card glass">
+<h3>Travel Consultants</h3>
+<p>We guide you from booking to return with full support.</p>
+</div>
+
+<div class="card glass">
+<h3>Support Team</h3>
+<p>Available 24/7 via WhatsApp for instant assistance.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+
+<h2>Ready to Explore the World?</h2>
+
+<p>Start your journey with Tourwallex today.</p>
+
+<a href="booking.html" class="btn">Book Your Trip</a>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
 <footer>
-<p>© 2026 Tourwallex</p>
+
+<div class="footer-grid">
+
+<div>
+<h3>Tourwallex</h3>
+<p>Premium travel experiences worldwide.</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<a href="index.html">Home</a>
+<a href="tours.html">Tours</a>
+<a href="booking.html">Booking</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<div>
+<h4>Follow Us</h4>
+<p>Instagram | Facebook | TikTok</p>
+</div>
+
+</div>
+
+<p class="copy">© 2026 Tourwallex</p>
+
 </footer>
+
+<!-- ================= SCRIPT ================= -->
+<script src="js/app.js"></script>
+
+<script>
+const toggle = document.getElementById("menu-toggle");
+const menu = document.getElementById("nav-menu");
+
+toggle.addEventListener("click", () => {
+menu.classList.toggle("active");
+});
+</script>
 
 </body>
 </html>
