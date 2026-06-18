@@ -1,226 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourwallex | Travel Beyond Boundaries</title>
 
-<title>Tourwallex | Explore The World</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- ================= NAV ================= -->
-<header class="nav">
+    <!-- Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <span>Tour</span>Wallex
+            </div>
 
-<div class="logo">Tour<span>Wallex</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#packages">Packages</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
 
-<div class="menu-toggle" id="menu-toggle">☰</div>
+            <a href="#contact" class="btn-nav">Book Now</a>
+        </nav>
+    </header>
 
-<nav id="nav-menu">
-<a href="index.html">Home</a>
-<a href="tours.html">Tours</a>
-<a href="about.html">About</a>
-<a href="booking.html">Booking</a>
-<a href="contact.html">Contact</a>
-</nav>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
 
-</header>
+        <div class="hero-content">
+            <h1>
+                Travel Beyond
+                <span>Boundaries</span>
+            </h1>
 
-<!-- ================= HERO SLIDER ================= -->
-<section class="hero">
+            <p>
+                Discover breathtaking destinations, unforgettable adventures,
+                and personalized travel experiences with Tourwallex.
+            </p>
 
-<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')"></div>
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4')"></div>
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470')"></div>
+            <div class="hero-buttons">
+                <a href="#packages" class="btn-primary">Explore Tours</a>
+                <a href="#contact" class="btn-secondary">Get A Quote</a>
+            </div>
+        </div>
+    </section>
 
-<div class="hero-overlay"></div>
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <div class="container">
+            <h2>Why Choose Tourwallex?</h2>
 
-<div class="hero-content">
-<h1>Discover Your Next Adventure</h1>
-<p>Travel smarter with Tourwallex — explore the world with ease.</p>
+            <div class="features-grid">
 
-<a href="booking.html" class="btn">Book a Trip</a>
-<a href="tours.html" class="btn-outline">View Tours</a>
-</div>
+                <div class="feature-card">
+                    <div class="icon">🌍</div>
+                    <h3>Global Destinations</h3>
+                    <p>Explore local and international destinations with ease.</p>
+                </div>
 
-</section>
+                <div class="feature-card">
+                    <div class="icon">✈️</div>
+                    <h3>Flight Booking</h3>
+                    <p>Affordable flight options tailored to your travel needs.</p>
+                </div>
 
-<!-- ================= FEATURED TOURS (DYNAMIC) ================= -->
-<section class="section">
+                <div class="feature-card">
+                    <div class="icon">🏨</div>
+                    <h3>Hotel Reservations</h3>
+                    <p>Comfortable accommodation for every budget.</p>
+                </div>
 
-<h2>Featured Tours</h2>
+                <div class="feature-card">
+                    <div class="icon">🚐</div>
+                    <h3>Group Tours</h3>
+                    <p>Exciting experiences for families, teams, and groups.</p>
+                </div>
 
-<div class="grid" id="tourGrid"></div>
+                <div class="feature-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Safe Travel</h3>
+                    <p>Your safety and comfort remain our top priority.</p>
+                </div>
 
-</section>
+                <div class="feature-card">
+                    <div class="icon">💬</div>
+                    <h3>24/7 Support</h3>
+                    <p>Dedicated support before, during, and after your trip.</p>
+                </div>
 
-<!-- ================= DESTINATIONS ================= -->
-<section class="section dark">
+            </div>
+        </div>
+    </section>
 
-<h2>Popular Destinations</h2>
+    <!-- Destinations -->
+    <section class="destinations" id="destinations">
+        <div class="container">
 
-<div class="grid">
+            <h2>Popular Destinations</h2>
 
-<div class="card glass">
-<h3>Dubai</h3>
-<p>Luxury desert experience</p>
-</div>
+            <div class="destination-grid">
 
-<div class="card glass">
-<h3>Bali</h3>
-<p>Tropical paradise escape</p>
-</div>
+                <div class="destination-card">
+                    <img src="images/dubai.jpg" alt="Dubai">
+                    <div class="destination-info">
+                        <h3>Dubai</h3>
+                        <p>Luxury, adventure and unforgettable experiences.</p>
+                    </div>
+                </div>
 
-<div class="card glass">
-<h3>Paris</h3>
-<p>Romantic city of lights</p>
-</div>
+                <div class="destination-card">
+                    <img src="images/zanzibar.jpg" alt="Zanzibar">
+                    <div class="destination-info">
+                        <h3>Zanzibar</h3>
+                        <p>Relax on pristine beaches and turquoise waters.</p>
+                    </div>
+                </div>
 
-</div>
+                <div class="destination-card">
+                    <img src="images/capecoast.jpg" alt="Cape Coast">
+                    <div class="destination-info">
+                        <h3>Cape Coast</h3>
+                        <p>Experience Ghana's rich history and culture.</p>
+                    </div>
+                </div>
 
-</section>
+            </div>
 
-<!-- ================= TESTIMONIALS ================= -->
-<section class="section">
+        </div>
+    </section>
 
-<h2>What Travelers Say</h2>
+    <!-- Packages -->
+    <section class="packages" id="packages">
+        <div class="container">
 
-<div class="testimonial-container">
+            <h2>Tour Packages</h2>
 
-<div class="testimonial active">
-<p>"Tourwallex made my vacation unforgettable!"</p>
-<h4>- Sarah Johnson</h4>
-</div>
+            <div class="package-grid">
 
-<div class="testimonial">
-<p>"Best travel booking experience ever."</p>
-<h4>- Michael Brown</h4>
-</div>
+                <div class="package-card">
+                    <h3>Weekend Escape</h3>
+                    <div class="price">$199</div>
 
-<div class="testimonial">
-<p>"Highly professional and smooth service."</p>
-<h4>- David Smith</h4>
-</div>
+                    <ul>
+                        <li>Hotel Accommodation</li>
+                        <li>Transportation</li>
+                        <li>Tour Guide</li>
+                        <li>Breakfast Included</li>
+                    </ul>
 
-</div>
+                    <a href="#" class="package-btn">Book Package</a>
+                </div>
 
-</section>
+                <div class="package-card featured">
+                    <div class="badge">Popular</div>
 
-<!-- ================= CALL TO ACTION ================= -->
-<section class="cta">
+                    <h3>Family Adventure</h3>
+                    <div class="price">$499</div>
 
-<h2>Ready for your next adventure?</h2>
+                    <ul>
+                        <li>Family Activities</li>
+                        <li>Hotel Stay</li>
+                        <li>Transportation</li>
+                        <li>Guided Excursions</li>
+                    </ul>
 
-<a href="booking.html" class="btn">Start Booking Now</a>
+                    <a href="#" class="package-btn">Book Package</a>
+                </div>
 
-</section>
+                <div class="package-card">
+                    <h3>Luxury Experience</h3>
+                    <div class="price">$999</div>
 
-<!-- ================= WHATSAPP FLOAT ================= -->
-<a class="whatsapp" href="https://wa.me/233000000000" target="_blank">💬</a>
+                    <ul>
+                        <li>Luxury Hotels</li>
+                        <li>VIP Transfers</li>
+                        <li>Private Guide</li>
+                        <li>Premium Experiences</li>
+                    </ul>
 
-<!-- ================= FOOTER ================= -->
-<footer>
+                    <a href="#" class="package-btn">Book Package</a>
+                </div>
 
-<div class="footer-grid">
+            </div>
 
-<div>
-<h3>Tourwallex</h3>
-<p>Premium travel experiences worldwide.</p>
-</div>
+        </div>
+    </section>
 
-<div>
-<h4>Quick Links</h4>
-<a href="index.html">Home</a>
-<a href="tours.html">Tours</a>
-<a href="booking.html">Booking</a>
-<a href="contact.html">Contact</a>
-</div>
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
 
-<div>
-<h4>Follow Us</h4>
-<p>Instagram | Facebook | TikTok</p>
-</div>
+            <h2>Our Services</h2>
 
-</div>
+            <div class="services-grid">
 
-<p class="copy">© 2026 Tourwallex</p>
+                <div class="service-card">
+                    <h3>Tour Planning</h3>
+                    <p>Custom travel itineraries designed around your needs.</p>
+                </div>
 
-</footer>
+                <div class="service-card">
+                    <h3>Visa Assistance</h3>
+                    <p>Guidance and support throughout the visa process.</p>
+                </div>
 
-<!-- ================= SCRIPT ================= -->
-<script src="js/app.js"></script>
+                <div class="service-card">
+                    <h3>Flight Reservations</h3>
+                    <p>Affordable flight booking services worldwide.</p>
+                </div>
 
-<script>
+                <div class="service-card">
+                    <h3>Hotel Booking</h3>
+                    <p>Secure accommodation reservations globally.</p>
+                </div>
 
-/* ================= HERO SLIDER ================= */
-const slides = document.querySelectorAll(".slide");
-let i = 0;
+                <div class="service-card">
+                    <h3>Corporate Travel</h3>
+                    <p>Business travel planning and management.</p>
+                </div>
 
-setInterval(() => {
-slides.forEach(s => s.classList.remove("active"));
-i = (i + 1) % slides.length;
-slides[i].classList.add("active");
-}, 5000);
+                <div class="service-card">
+                    <h3>Honeymoon Packages</h3>
+                    <p>Romantic getaways crafted for couples.</p>
+                </div>
 
-/* ================= TESTIMONIAL SLIDER ================= */
-const testimonials = document.querySelectorAll(".testimonial");
-let t = 0;
+            </div>
 
-setInterval(() => {
-testimonials.forEach(x => x.classList.remove("active"));
-t = (t + 1) % testimonials.length;
-testimonials[t].classList.add("active");
-}, 4000);
+        </div>
+    </section>
 
-/* ================= MOBILE MENU ================= */
-const toggle = document.getElementById("menu-toggle");
-const menu = document.getElementById("nav-menu");
+    <!-- CTA -->
+    <section class="cta">
 
-toggle.addEventListener("click", () => {
-menu.classList.toggle("active");
-});
+        <div class="container">
 
-/* ================= DYNAMIC TOURS ================= */
-const tours = [
-{
-title: "Dubai Luxury Escape",
-price: "$1200",
-days: "5 Days"
-},
-{
-title: "Bali Adventure",
-price: "$900",
-days: "7 Days"
-},
-{
-title: "Paris Romance",
-price: "$1500",
-days: "6 Days"
-}
-];
+            <h2>Ready For Your Next Adventure?</h2>
 
-const grid = document.getElementById("tourGrid");
+            <p>
+                Let Tourwallex handle the planning while you focus on making memories.
+            </p>
 
-tours.forEach(tour => {
-const card = document.createElement("div");
-card.classList.add("card","glass");
+            <a href="#contact" class="btn-primary">
+                Start Your Journey
+            </a>
 
-card.innerHTML = `
-<h3>${tour.title}</h3>
-<p>${tour.days}</p>
-<strong>${tour.price}</strong>
-<br><br>
-<a href="booking.html" class="btn">Book Now</a>
-`;
+        </div>
 
-grid.appendChild(card);
-});
+    </section>
 
-</script>
+    <!-- Contact -->
+    <section class="contact" id="contact">
+
+        <div class="container">
+
+            <h2>Contact Us</h2>
+
+            <div class="contact-grid">
+
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+
+                    <p>📍 Accra, Ghana</p>
+                    <p>📞 +233 XX XXX XXXX</p>
+                    <p>📧 info@tourwallex.com</p>
+                </div>
+
+                <form class="contact-form">
+
+                    <input type="text" placeholder="Your Name">
+
+                    <input type="email" placeholder="Your Email">
+
+                    <input type="text" placeholder="Destination">
+
+                    <textarea rows="6" placeholder="Tell us about your trip"></textarea>
+
+                    <button type="submit">
+                        Send Inquiry
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-logo">
+                TourWallex
+            </div>
+
+            <p>
+                Travel Beyond Boundaries.
+            </p>
+
+            <p class="copyright">
+                © 2026 Tourwallex. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
 
 </body>
 </html>
